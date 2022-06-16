@@ -30,7 +30,7 @@ namespace AdminAbilitiesTracker
             {
                 sb.AppendLine($"Unable to convert steamid to player id {steamId}");
             }
-            var oldSettings = MySession.Static.RemoteAdminSettings[steamId];
+            var oldSettings = MySession.Static.RemoteAdminSettings.ContainsKey(steamId) ? MySession.Static.RemoteAdminSettings[steamId] : AdminSettingsEnum.None;
             bool didanyChanges = false;
             foreach (Enum setting in Enum.GetValues(typeof(AdminSettingsEnum)))
             {
