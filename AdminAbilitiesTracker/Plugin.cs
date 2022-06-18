@@ -48,11 +48,10 @@ namespace AdminAbilitiesTracker
         {
             if (MySession.Static != null && MyRenderProxy.DrawRenderStats == MyRenderProxy.MyStatsState.SimpleTimingStats)
             {
-                //Borrowed stuff from keen's debug menu
                 IMyCamera camera = ((IMySession)MySession.Static).Camera;
-                Vector2 vector2_1 = new Vector2(camera.ViewportSize.X * 0.01f, camera.ViewportSize.Y * 0.3f);
+                Vector2 vector2_1 = new Vector2(camera.ViewportSize.X * (1 - 0.01f), camera.ViewportSize.Y * 0.01f);
                 float num1 = 0.65f * Math.Min(camera.ViewportSize.X / 1920f, camera.ViewportSize.Y / 1200f);
-                foreach (var kvp in MySession.Static.RemoteAdminSettings)
+                foreach (var kvp in MySession.Static.RemoteAdminSettings.ToList())
                 {
                     if ((kvp.Value & AdminSettingsEnum.AdminOnly) > AdminSettingsEnum.None)
                     {
@@ -68,7 +67,7 @@ namespace AdminAbilitiesTracker
                         sb.AppendLine($"{playerName} - {kvp.Value}");
                     }
                 }
-                MyRenderProxy.DebugDrawText2D(vector2_1, sb.ToString(), Color.Yellow ,num1);
+                MyRenderProxy.DebugDrawText2D(vector2_1, sb.ToString(), Color.Yellow, num1, MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_TOP);
                 sb.Clear();
             }
         }
