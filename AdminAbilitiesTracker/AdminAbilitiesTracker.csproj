@@ -48,10 +48,10 @@
       <HintPath>..\..\..\..\Steam\steamapps\common\SpaceEngineers\Bin64\NLog.dll</HintPath>
     </Reference>
     <Reference Include="ProtoBuf.Net">
-      <HintPath>..\..\..\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.dll</HintPath>
     </Reference>
     <Reference Include="ProtoBuf.Net.Core">
-      <HintPath>..\..\..\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.Core.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Common">
       <HintPath>..\..\..\..\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
@@ -118,6 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminSettingsChangedClientPatch.cs" />
+    <Compile Include="ConfigObject.cs" />
+    <Compile Include="MyGuiScreenConfig.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

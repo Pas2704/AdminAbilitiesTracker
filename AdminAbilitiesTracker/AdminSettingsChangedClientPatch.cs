@@ -17,36 +17,39 @@ namespace AdminAbilitiesTracker
         [HarmonyPrefix]
         public static void OnSettingsUpdated(AdminSettingsEnum settings, ulong steamId)
         {
-            StringBuilder sb = new StringBuilder();
-
-            bool didResolve = MySession.Static.Players.TryGetPlayerBySteamId(steamId, out MyPlayer player);
-
-            if (didResolve)
+            if (Plugin.SendChatMessages)
             {
-                sb.AppendLine($"Admin settings changed for {player.DisplayName} ({steamId})");
+                StringBuilder sb = new StringBuilder();
 
-            }
-            else
-            {
-                sb.AppendLine($"Unable to convert steamid to player id {steamId}");
-            }
-            var oldSettings = MySession.Static.RemoteAdminSettings.ContainsKey(steamId) ? MySession.Static.RemoteAdminSettings[steamId] : AdminSettingsEnum.None;
-            bool didanyChanges = false;
-            foreach (Enum setting in Enum.GetValues(typeof(AdminSettingsEnum)))
-            {
-                bool hasChanged = oldSettings.HasFlag(setting) != settings.HasFlag(setting);
-                Console.WriteLine($"{oldSettings.HasFlag(setting)} - {settings.HasFlag(setting)}");
-                if (hasChanged)
+                bool didResolve = MySession.Static.Players.TryGetPlayerBySteamId(steamId, out MyPlayer player);
+
+                if (didResolve)
                 {
-                    sb.AppendLine($"{setting} - was: {oldSettings.HasFlag(setting)}, now: {settings.HasFlag(setting)}");
-                    didanyChanges = true;
-                }
-            }
+                    sb.AppendLine($"Admin settings changed for {player.DisplayName} ({steamId})");
 
-            if (didanyChanges)
-            {
-                Console.WriteLine(sb);
-                MyHud.Chat.ShowMessage("AdminAbilitiesTracker", sb.ToString(), Color.White, "Green");
+                }
+                else
+                {
+                    sb.AppendLine($"Unable to convert steamid to player id {steamId}");
+                }
+                var oldSettings = MySession.Static.RemoteAdminSettings.ContainsKey(steamId) ? MySession.Static.RemoteAdminSettings[steamId] : AdminSettingsEnum.None;
+                bool didanyChanges = false;
+                foreach (Enum setting in Enum.GetValues(typeof(AdminSettingsEnum)))
+                {
+                    bool hasChanged = oldSettings.HasFlag(setting) != settings.HasFlag(setting);
+                    Console.WriteLine($"{oldSettings.HasFlag(setting)} - {settings.HasFlag(setting)}");
+                    if (hasChanged)
+                    {
+                        sb.AppendLine($"{setting} - was: {oldSettings.HasFlag(setting)}, now: {settings.HasFlag(setting)}");
+                        didanyChanges = true;
+                    }
+                }
+
+                if (didanyChanges)
+                {
+                    Console.WriteLine(sb);
+                    MyHud.Chat.ShowMessage("AdminAbilitiesTracker", sb.ToString(), Color.White, "Green");
+                }
             }
         }
     }
