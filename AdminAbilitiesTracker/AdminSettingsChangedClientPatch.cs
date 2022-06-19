@@ -46,7 +46,7 @@ namespace AdminAbilitiesTracker
             if (didanyChanges)
             {
                 Console.WriteLine(sb);
-                MyHud.Chat.ShowMessage("Admin Abuse Detection", sb.ToString(), Color.White, "Green");
+                MyHud.Chat.ShowMessage("AdminAbilitiesTracker", sb.ToString(), Color.White, "Green");
             }
         }
     }
